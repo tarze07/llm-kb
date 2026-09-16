@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LLM KB — baza wiedzy o dużych modelach językowych</title>
 <meta name="description" content="Punkt startowy do materiałów o LLM: gra edukacyjna oraz przewodnik po OWASP Top 10 dla aplikacji wykorzystujących duże modele językowe.">
+<script>
+  // Ustaw motyw przed pierwszym malowaniem, żeby uniknąć mignięcia.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('llm-kb-theme'); } catch (e) {}
+    if (saved !== 'dark' && saved !== 'light') {
+      saved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', saved);
+  })();
+</script>
 <style>
   :root {
     --bg: #f6f7fb;
@@ -54,6 +65,33 @@
     padding: 64px 16px 80px;
   }
   header { margin-bottom: 40px; }
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .eyebrow { margin-bottom: 0; }
+  .theme-toggle {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .theme-toggle .tt-icon { font-size: 15px; }
   .eyebrow {
     display: inline-block;
     font-size: 12px;
@@ -63,7 +101,6 @@
     background: var(--accent-soft);
     border-radius: 999px;
     padding: 4px 12px;
-    margin-bottom: 16px;
   }
   h1 {
     font-size: clamp(28px, 5vw, 40px);
@@ -140,7 +177,12 @@
 <body>
 <div class="wrap">
   <header>
-    <span class="eyebrow">LLM KB</span>
+    <div class="topbar">
+      <span class="eyebrow">LLM KB</span>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-live="polite">
+        <span class="tt-icon" aria-hidden="true">🌙</span><span class="tt-label">Motyw</span>
+      </button>
+    </div>
     <h1>Baza wiedzy o dużych modelach językowych</h1>
     <p class="lead">
       Ta strona jest rozdrożem — prowadzi do dwóch osobnych projektów poświęconych
@@ -193,5 +235,49 @@
     </p>
   </footer>
 </div>
+
+<script>
+(function () {
+  var KEY = 'llm-kb-theme';
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  var icon = btn.querySelector('.tt-icon');
+  var label = btn.querySelector('.tt-label');
+  var media = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function remember(value) {
+    try { localStorage.setItem(KEY, value); } catch (e) { /* prywatne okno, zablokowane dane */ }
+  }
+  function effective() {
+    var saved = stored();
+    if (saved === 'dark' || saved === 'light') return saved;
+    return media.matches ? 'dark' : 'light';
+  }
+  function apply(theme) {
+    root.setAttribute('data-theme', theme);
+    var next = theme === 'dark' ? 'jasny' : 'ciemny';
+    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    label.textContent = 'Motyw: ' + (theme === 'dark' ? 'ciemny' : 'jasny');
+    btn.setAttribute('aria-label', 'Przełącz na motyw ' + next);
+    btn.setAttribute('title', 'Przełącz na motyw ' + next);
+  }
+
+  apply(effective());
+
+  btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    remember(next);
+    apply(next);
+  });
+
+  // Dopóki użytkownik sam nie wybierze motywu, podążaj za ustawieniem systemu.
+  var onChange = function () { if (!stored()) apply(media.matches ? 'dark' : 'light'); };
+  if (media.addEventListener) media.addEventListener('change', onChange);
+  else if (media.addListener) media.addListener(onChange);
+})();
+</script>
 </body>
 </html>
