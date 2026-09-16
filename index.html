@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM KB — baza wiedzy o dużych modelach językowych</title>
+<meta name="description" content="Punkt startowy do materiałów o LLM: gra edukacyjna oraz przewodnik po OWASP Top 10 dla aplikacji wykorzystujących duże modele językowe.">
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --surface: #ffffff;
+    --border: #e2e5ee;
+    --text: #15181f;
+    --muted: #5b6072;
+    --accent: #4b4ddb;
+    --accent-soft: #ececfd;
+    --shadow: 0 1px 2px rgba(16, 20, 40, .06), 0 8px 24px rgba(16, 20, 40, .06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1016;
+      --surface: #171a22;
+      --border: #272b36;
+      --text: #eceef4;
+      --muted: #a0a6b8;
+      --accent: #9b9cff;
+      --accent-soft: #23253a;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1016;
+    --surface: #171a22;
+    --border: #272b36;
+    --text: #eceef4;
+    --muted: #a0a6b8;
+    --accent: #9b9cff;
+    --accent-soft: #23253a;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 64px 16px 80px;
+  }
+  header { margin-bottom: 40px; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.2;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .lead {
+    font-size: clamp(16px, 2.2vw, 18px);
+    color: var(--muted);
+    margin: 0;
+    max-width: 62ch;
+  }
+
+  .cards {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: inherit;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .card:hover, .card:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .card .icon { font-size: 28px; margin-bottom: 14px; }
+  .card h2 { font-size: 20px; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .card p { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+  .card ul {
+    margin: 0 0 20px;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .card li { margin-bottom: 4px; }
+  .cta {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 15px;
+  }
+  .url {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--muted);
+    word-break: break-all;
+    margin-bottom: 14px;
+  }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 14px;
+  }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">LLM KB</span>
+    <h1>Baza wiedzy o dużych modelach językowych</h1>
+    <p class="lead">
+      Ta strona jest rozdrożem — prowadzi do dwóch osobnych projektów poświęconych
+      modelom językowym (LLM). Pierwszy uczy przez zabawę, drugi porządkuje wiedzę
+      o zagrożeniach bezpieczeństwa. Wybierz, dokąd chcesz przejść.
+    </p>
+  </header>
+
+  <main class="cards">
+    <a class="card" href="https://tarze07.github.io/llm-game/">
+      <div class="icon" aria-hidden="true">🎮</div>
+      <h2>LLM Game</h2>
+      <div class="url">tarze07.github.io/llm-game/</div>
+      <p>
+        Interaktywna gra edukacyjna o dużych modelach językowych. Zamiast czytać
+        teorię, uczysz się działania LLM-ów przez rozwiązywanie kolejnych zadań
+        w przeglądarce.
+      </p>
+      <ul>
+        <li>nauka przez praktykę, krok po kroku</li>
+        <li>działa w przeglądarce, bez instalacji</li>
+        <li>dobre wejście dla osób zaczynających z LLM</li>
+      </ul>
+      <span class="cta">Przejdź do gry →</span>
+    </a>
+
+    <a class="card" href="https://tarze07.github.io/llm-owasp/">
+      <div class="icon" aria-hidden="true">🛡️</div>
+      <h2>LLM OWASP</h2>
+      <div class="url">tarze07.github.io/llm-owasp/</div>
+      <p>
+        Przewodnik po zagrożeniach bezpieczeństwa aplikacji opartych na LLM,
+        ułożony wokół listy OWASP Top 10 for LLM Applications — od prompt
+        injection po nadmierne uprawnienia agentów.
+      </p>
+      <ul>
+        <li>kategorie ryzyk z omówieniem</li>
+        <li>przykłady ataków i sposoby ochrony</li>
+        <li>materiał dla twórców i zespołów bezpieczeństwa</li>
+      </ul>
+      <span class="cta">Przejdź do materiałów →</span>
+    </a>
+  </main>
+
+  <footer>
+    <p>
+      Oba serwisy są hostowane na GitHub Pages w profilu
+      <a href="https://github.com/tarze07">tarze07</a>. Linki otwierają się w tej
+      samej karcie — użyj przycisku „wstecz”, aby wrócić na tę stronę.
+    </p>
+  </footer>
+</div>
+</body>
+</html>
