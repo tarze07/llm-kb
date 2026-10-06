@@ -118,7 +118,11 @@
   .cards {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr;
+  }
+  /* Dwie kolumny: kafelki o bezpieczenstwie zostaja w dolnym wierszu. */
+  @media (min-width: 680px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
   }
   .card {
     display: flex;
@@ -211,6 +215,23 @@
       <span class="cta">Przejdź do gry →</span>
     </a>
 
+    <a class="card" href="https://tarze07.github.io/llm-agents/#chain">
+      <div class="icon" aria-hidden="true">🔗</div>
+      <h2>LLM Agents</h2>
+      <div class="url">tarze07.github.io/llm-agents/#chain</div>
+      <p>
+        Symulator pracy agentów opartych na LLM. Pokazuje, jak zadanie
+        przechodzi przez kolejne ogniwa łańcucha — od promptu, przez wywołania
+        narzędzi, aż do wyniku — i gdzie taki łańcuch może się urwać.
+      </p>
+      <ul>
+        <li>łańcuch działań agenta krok po kroku</li>
+        <li>eksperymenty na żywo w przeglądarce</li>
+        <li>link prowadzi wprost do sekcji <em>chain</em></li>
+      </ul>
+      <span class="cta">Przejdź do symulatora →</span>
+    </a>
+
     <a class="card" href="https://tarze07.github.io/llm-owasp/">
       <div class="icon" aria-hidden="true">🛡️</div>
       <h2>LLM OWASP</h2>
@@ -227,6 +248,7 @@
       </ul>
       <span class="cta">Przejdź do materiałów →</span>
     </a>
+
     <a class="card" href="https://tarze07.github.io/llm-sym/">
       <div class="icon" aria-hidden="true">🕵️</div>
       <h2>LLM Sym</h2>
@@ -245,24 +267,6 @@
       </ul>
       <span class="cta">Przejdź do opracowania →</span>
     </a>
-
-    <a class="card" href="https://tarze07.github.io/llm-agents/#chain">
-      <div class="icon" aria-hidden="true">🔗</div>
-      <h2>LLM Agents</h2>
-      <div class="url">tarze07.github.io/llm-agents/#chain</div>
-      <p>
-        Symulator pracy agentów opartych na LLM. Pokazuje, jak zadanie
-        przechodzi przez kolejne ogniwa łańcucha — od promptu, przez wywołania
-        narzędzi, aż do wyniku — i gdzie taki łańcuch może się urwać.
-      </p>
-      <ul>
-        <li>łańcuch działań agenta krok po kroku</li>
-        <li>eksperymenty na żywo w przeglądarce</li>
-        <li>link prowadzi wprost do sekcji <em>chain</em></li>
-      </ul>
-      <span class="cta">Przejdź do symulatora →</span>
-    </a>
-
   </main>
 
   <footer>
